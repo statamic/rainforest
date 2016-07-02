@@ -30,11 +30,9 @@ As long as you like the basic theme, Rainforest is very close to drop-and-go rea
 
 ## Clients
 
-Clients are necessary to help you group invoices. Clients are simply Users without any permissions. If you create them by hand, you can even set the `slug` (the filename) to be a nice pretty handle to create URLs that look like `invoices/acme/big-job` instead of `invoices/2504ec9b-1c04-47c3-99d4-eeeba9c0e9d9/big-job`.
+Clients are necessary to help you group invoices. Clients are simply Users without any permissions. If you set their `email`, you'll be able to send pre-populated emails from your dashboard with a link to their invoice.
 
-If you set a client's `email`, you'll be able to send pre-populated emails from your dashboard with a link to their invoice.
-
-Rainforest includes two dummy clients so you can see how everything works. You're going to want to delete them when you're ready.
+Rainforest includes two dummy clients so you can see how everything works. You'll probably want to delete them when you're done exploring.
 
 ## Invoices
 
@@ -44,7 +42,7 @@ If you set a `price`, it will override the hourly calculation.
 
 Once an invoice is paid with Stripe, it will automatically be marked as `PAID`.
 
-Rainforest includes four dummy invoices so you can see how everything works. You're going to want to delete them when you're ready.
+Rainforest includes four dummy invoices so you can see how everything works. You'll probably want to delete them along with the dummy clients when you're done exploring.
 
 ## Admin User
 

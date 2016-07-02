@@ -2,3 +2,4 @@ id: 898ee029-8fb8-4c02-a1cc-97c063e719eb
 super: true
 name: Admin
 email: admin@example.com
+password_hash: $2y$10$.oq52hpL5tzY/cLgF14GmOLHOrnHEAhl3Kr5xtN70vY40ZSxyBJsS

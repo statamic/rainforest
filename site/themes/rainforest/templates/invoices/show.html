@@ -46,7 +46,7 @@
     {{ if ! paid && logged_in }}
     <div class="controls">
         <a href="{{ edit_url }}" class="edit">Edit Invoice</a>
-        {{ user:client }}
+        {{ user:client username="{client}" }}
         <a href="mailto:{{ email }}?subject={{ title }}&body={{ permalink }}" class="edit">Send Email</a>
         {{ /user:client }}
     </div>
