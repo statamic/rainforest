@@ -1,0 +1,54 @@
+.card {
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 40px rgba(0,0,0,.6);
+    padding: 35px;
+    margin: 0 auto 60px;
+
+    &.small {
+        max-width: 320px;
+    }
+
+    &.flush {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .paid {
+        color: $green;
+        padding: 0;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 100px;
+
+        &:last-child { margin-bottom: 0; }
+
+        tr:hover { background: #f4f4f4;}
+
+        td {
+            padding: 15px 0;
+            border-top: 1px solid #dedede;
+        }
+
+        td:first-child { padding-left: 35px; }
+        td:last-child { text-align: right; padding-right: 35px; }
+
+        td.email {
+            font-size: 16px;
+            font-weight: 300;
+            svg {
+                width: 20px;
+            }
+            a:hover svg {
+                fill: $green;
+            }
+        }
+    }
+
+    footer {
+        padding-top: 30px;
+    }
+}

@@ -1,0 +1,17 @@
+h1 {
+	font: normal 21px $font_lato;
+	margin: 0;
+
+	strong {
+		color: $color_gray_dark;
+		font-weight: normal;
+	}
+}
+
+a {
+	color: $brand-darker;
+	&:hover {
+		color: #333;
+		text-decoration: none;
+	}
+}

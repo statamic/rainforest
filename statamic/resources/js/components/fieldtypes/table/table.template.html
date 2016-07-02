@@ -1,0 +1,33 @@
+<div class="table-field">
+	<table class="bordered-table" v-if="rowCount || columnCount">
+		<thead>
+			<tr>
+				<th v-for="column in columnCount">
+					<span class="column-count">{{ $index + 1 }}</span>
+					<span class="icon icon-cross delete-column" @click="deleteColumn($index)"></span>
+				</th>
+				<th class="row-controls"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="row in data">
+				<td v-for="cell in row.cells" track-by="$index">
+					<input type="text" v-model="cell" class="form-control" />
+				</td>
+				<td class="row-controls">
+					<span class="icon icon-menu move drag-handle"></span>
+					<span class="icon icon-cross delete" v-on:click="deleteRow(rowIndex)"></span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div class="btn-group">
+		<a href="" class="btn btn-default" @click.prevent="addRow" v-if="canAddRows">
+			{{ translate_choice('cp.rows', 1) }} <i class="icon icon-plus icon-right"></i>
+		</a>
+		<a href="" class="btn btn-default" @click.prevent="addColumn" v-if="canAddColumns">
+			{{ translate_choice('cp.columns', 1) }} <i class="icon icon-plus icon-right"></i>
+		</a>
+	</div>
+</div>

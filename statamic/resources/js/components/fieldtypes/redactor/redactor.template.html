@@ -1,0 +1,11 @@
+<div class="redactor-wrapper">
+    <textarea v-el:redactor :name="name" v-model="data"></textarea>
+
+    <selector v-if="assetsEnabled"
+              :container="container"
+              :folder="folder"
+              :selected="selectedAssets"
+              :show.sync="assetSelector"
+              :view-mode="selectorViewMode"
+    ></selector>
+</div>

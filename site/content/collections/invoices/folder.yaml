@@ -1,0 +1,3 @@
+order: date
+template: invoices/show
+fieldset: invoice

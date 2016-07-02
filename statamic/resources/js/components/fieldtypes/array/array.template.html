@@ -1,0 +1,48 @@
+<div class="array-fieldtype-container">
+
+    <div class='grid-field array-keyed' v-if="componentType === 'keyed'">
+        <table class="grid-table grid-mode-table headless">
+            <tbody>
+                <tr v-if="data" v-for="key in config.keys">
+                    <th>{{ key.text }}</th>
+                    <td>
+                        <input type="text" class="form-control" v-model="data[key.value]" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <template v-if="componentType === 'dynamic'">
+        <div class="grid-field array-dynamic">
+            <table class="grid-table grid-mode-table" v-if="hasRows">
+                <thead>
+                    <tr>
+                        <th>{{ valueHeader }}</th>
+                        <th>{{ textHeader }}</th>
+                        <th class="row-controls"></th>
+                    </tr>
+                </thead>
+                <tbody v-el:tbody>
+                    <tr v-for="(rowIndex, row) in data">
+                        <td>
+                            <input type="text" class="form-control" v-model="row.value" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" v-model="row.text" />
+                        </td>
+                        <td class="row-controls">
+                            <span class="icon icon-menu move drag-handle"></span>
+                            <span class="icon icon-cross delete" v-on:click="deleteRow(rowIndex)"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-default" @click="addRow">
+                {{ addRowButton }} <i class="icon icon-plus"></i>
+            </button>
+        </div>
+    </template>
+
+</div>

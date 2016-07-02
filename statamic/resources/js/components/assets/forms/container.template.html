@@ -1,0 +1,87 @@
+<div class="alert alert-danger" v-if="hasErrors">
+    <ul>
+        <li v-for="error in errors">{{ error }}</li>
+    </ul>
+</div>
+
+<div class="publish-form card">
+    <div class="head">
+        <h1 v-if="isNew">Creating a new asset container</h1>
+        <h1 v-else>Editing asset container</h1>
+
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" @click="save">{{ translate('cp.save') }}</button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="publish-fields">
+
+        <div class="form-group">
+            <label class="block">Title</label>
+            <small class="help-block">The display name of the container.</small>
+            <input type="text" class="form-control" v-model="config.title" />
+        </div>
+
+        <div class="form-group" v-if="isNew">
+            <label class="block">Handle</label>
+            <div class="help-block">A unique string that you can use to reference your container. <b>This cannot be changed after creation.</b></div>
+            <input type="text" class="form-control" v-model="config.handle" @keydown="isHandleModified = true" />
+        </div>
+
+        <div class="form-group">
+            <label class="block">Fieldset</label>
+            <small class="help-block">The fieldset to be used by assets in this container.</small>
+            <fieldset-fieldtype :data.sync="config.fieldset"></fieldset-fieldtype>
+        </div>
+
+        <div class="form-group">
+            <label class="block">Driver</label>
+            <small class="help-block">Where will the assets be stored and accessed?</small>
+            <select-fieldtype :data.sync="config.driver" :options="drivers"></select-fieldtype>
+        </div>
+
+        <template v-if="driver === 'local'">
+            <div class="form-group">
+                <label class="block">Path</label>
+                <small class="help-block">Location of the folder on the filesystem.</small>
+                <input type="text" class="form-control" v-model="config.local.path" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">URL</label>
+                <small class="help-block">URL of the folder.</small>
+                <input type="text" class="form-control" v-model="config.local.url" />
+            </div>
+        </template>
+
+        <template v-if="driver === 's3'">
+            <div class="form-group">
+                <label class="block">Access Key ID</label>
+                <input type="text" class="form-control" v-model="config.s3.key" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">Secret Access Key</label>
+                <input type="text" class="form-control" v-model="config.s3.secret" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">Bucket</label>
+                <input type="text" class="form-control" v-model="config.s3.bucket" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">Region</label>
+                <select-fieldtype :data.sync="config.s3.region" :options="s3Regions"></select-fieldtype>
+            </div>
+
+            <div class="form-group">
+                <label class="block">Path</label>
+                <input type="text" class="form-control" v-model="config.s3.path" />
+            </div>
+        </template>
+
+    </div>
+</div>

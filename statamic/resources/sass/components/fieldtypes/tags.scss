@@ -1,0 +1,4 @@
+// Hide the dropdown. It's silly when it's just "Add [the thing you're typing]"
+.tags-fieldtype .selectize-dropdown {
+    display: none !important;
+}

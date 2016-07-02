@@ -1,0 +1,13 @@
+<div>
+
+    <div v-if="loading" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <select v-if="!loading"
+            :name="name"
+            placeholder="Please select"
+            :multiple="true">
+    </select>
+
+</div>

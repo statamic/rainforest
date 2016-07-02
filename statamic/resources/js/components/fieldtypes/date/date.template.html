@@ -1,0 +1,26 @@
+<div class="datetime clearfix">
+
+	<button type="button" class="btn btn-default add-date" v-if="!hasDate" @click="addDate">
+		{{ translate('cp.add_date') }}
+	</button>
+
+	<div v-if="hasDate" class="date-time-container">
+
+		<div class="col-date">
+			<div class="daterange daterange--single" :data-datetime="date">
+				<span class="icon icon-calendar"></span>
+				<span class="icon icon-remove" @click="removeDate" v-if="blankAllowed">&times;</span>
+			</div>
+		</div>
+		<div class="col-time">
+			<div class="time-fieldtype" v-if="timeAllowed">
+				<time-fieldtype v-ref:time v-show="hasTime" :data.sync="time"></time-fieldtype>
+				<button type="button" class="btn btn-default btn-icon add-time" v-show="!hasTime" @click="addTime">
+					<span class="icon icon-clock"></span>
+				</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>

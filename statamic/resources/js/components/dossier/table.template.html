@@ -1,0 +1,82 @@
+<div>
+    <div v-if="hasItems" :class="{ 'actions': true, 'no-checkboxes': !hasCheckboxes }">
+        <div class="actions-controls" v-if="hasCheckboxes">
+            <template v-if="!reordering">
+                <input type="checkbox" id="checkbox-all" :checked="allItemsChecked" @click="checkAllItems" />
+                <label for="checkbox-all"></label>
+
+                <button type="button" class="btn" @click.prevent="call('deleteMultiple', 'foo', 'bar')">
+                    {{ translate('cp.delete') }}
+                </button>
+
+                <button type="button" @click="enableReorder" class="btn" v-if="reorderable">
+                    {{ translate('cp.reorder') }}
+                </button>
+            </template>
+
+            <template v-if="reordering">
+                <button type="button" @click="saveOrder" class="btn">
+                    {{ translate('cp.save') }}
+                </button>
+                <button type="button" @click="disableReorder" class="btn">
+                    {{ translate('cp.cancel') }}
+                </button>
+            </template>
+        </div>
+
+        <search v-if="hasSearch && !reordering" :term.sync="search"></search>
+    </div>
+
+    <table class="dossier">
+        <thead v-if="hasHeaders">
+            <tr>
+                <th v-if="hasCheckboxes"></th>
+
+                <th v-for="column in columns"
+                    @click="sortBy(column)"
+                    class="column-sortable column-{{ column.label }}"
+                >
+                    <template v-if="column.translation">{{ column.translation }}</template>
+                    <template v-else>{{ translate('cp.'+column.label) }}</template>
+                    <i v-if="sortCol === column.field"
+                       class="icon icon-chevron-{{ (sortOrders[column.field] > 0) ? 'up' : 'down' }}"></i>
+                </th>
+
+                <th class="column-actions" v-if="hasActions"></th>
+            </tr>
+        </thead>
+        <tbody v-el:tbody>
+            <tr v-for="item in items | filterBy computedSearch | caseInsensitiveOrderBy computedSortCol computedSortOrder">
+
+                <td class="checkbox-col" v-if="hasCheckboxes && !reordering">
+                    <input type="checkbox" :id="'checkbox-' + $index" :checked="item.checked" @change="toggle(item)" />
+                    <label :for="'checkbox-' + $index"></label>
+                </td>
+
+                <td class="checkbox-col" v-if="reordering">
+                    <div class="drag-handle">
+                        <i class="icon icon-menu"></i>
+                    </div>
+                </td>
+
+                <td v-for="column in columns">
+                    <partial name="cell"></partial>
+                </td>
+
+                <!-- actions -->
+                <td class="column-actions" v-if="hasActions">
+                    <div class="btn-group">
+                        <button type="button" class="btn-more dropdown-toggle"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="icon icon-dots-three-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <partial name="actions"></partial>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

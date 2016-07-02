@@ -1,0 +1,37 @@
+<div class="card install-settings">
+
+    <div class="head">
+        <h1>Settings</h1>
+    </div>
+
+    <hr>
+
+    <template v-if="!success">
+
+        <div class="form-group">
+            <label>Locales and URLs</label>
+            <small class="help-block">
+                Create a locale for each language translation. You can skip this for now and do it later if you'd prefer.
+            </small>
+            <locale_settings-fieldtype :data="locales"></locale_settings-fieldtype>
+        </div>
+
+        <div class="form-group">
+            <label>Debug Mode</label>
+            <small class="help-block">
+                Enabling Debug Mode will display all errors on screen. It's a great tool while a site is development, but remember to
+                disable it in production.
+            </small>
+            <toggle-fieldtype :data.sync="debug"></toggle-fieldtype>
+        </div>
+
+        <button class="btn btn-primary" @click="submit" :disabled="loading">Save</button>
+
+    </template>
+
+    <template v-if="success">
+        <p>Settings updated.</p>
+    </template>
+
+
+</div>

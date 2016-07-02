@@ -1,0 +1,33 @@
+fields:
+
+  license_key:
+
+  locales:
+    type: locale_settings
+
+
+  date_format:
+
+  default_extension:
+    type: select
+    options:
+      md: Markdown
+      textile: Textile
+      html: HTML
+
+  filesystems:
+    type: yaml
+
+  app_key:
+
+  redactor:
+    type: grid
+    fields:
+      name:
+        type: text
+        width: 30
+      settings:
+        type: yaml
+
+#  protect:
+#    type: yaml

@@ -1,0 +1,72 @@
+<div class="markdown-wrap">
+
+    <div class="markdown-toolbar clearfix">
+        <ul class="markdown-modes">
+            <li :class="{ 'active': mode == 'write' }">
+                <a href="" @click.prevent="mode = 'write'">Write</a>
+            </li>
+            <li :class="{ 'active': mode == 'preview' }">
+                <a href="" @click.prevent="mode = 'preview'">Preview</a>
+            </li>
+        </ul>
+
+        <ul class="markdown-buttons">
+            <li><a href="" @click.prevent="bold"><b>B</b></a></li>
+            <li><a href="" @click.prevent="italic"><i>i</i></a></li>
+            <li><a href="" @click.prevent="insertLink('')">
+                <span class="icon icon-link"></span>
+            </a></li>
+            <li><a href="" @click.prevent="insertImage('')">
+                <span class="icon icon-image"></span>
+            </a></li>
+        </ul>
+    </div>
+
+    <div class="mode-wrap mode-{{ mode }}">
+        <div class="markdown-writer"
+             v-el:writer
+             v-show="mode == 'write'"
+             @dragover="draggingFile = true"
+             @dragleave="draggingFile = false"
+             @drop="draggingFile = false"
+             @keydown="shortcut"
+        >
+            <div class="editor" v-el:codemirror></div>
+
+            <div class="markdown-cheatsheet-helper" v-if="cheatsheet">
+                <a href="" @click.prevent="showCheatsheet = true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="208" height="128" viewBox="0 0 208 128"><mask id="a"><rect width="100%" height="100%" fill="#fff"/><path d="M30 98v-68h20l20 25 20-25h20v68h-20v-39l-20 25-20-25v39zM155 98l-30-33h20v-35h20v35h20z"/></mask><rect width="100%" height="100%" ry="15" mask="url(#a)"/></svg>
+                    Markdown Cheatsheet
+                </a>
+            </div>
+
+            <div class="markdown-asset-helper" v-if="assetsEnabled">
+                <a href="" @click.prevent="addAsset"><span class="icon icon-image"></span> Add Asset</a> (or drag &amp; drop)
+            </div>
+
+            <div class="drag-notification" v-if="assetsEnabled && draggingFile">
+                <i class="icon icon-download"></i>
+                <h3>Drop to upload</h3>
+            </div>
+        </div>
+
+        <div v-show="mode == 'preview'" v-html="data || '' | markdown" class="markdown-preview"></div>
+    </div>
+
+    <selector v-if="assetsEnabled"
+              :container="container"
+              :folder="folder"
+              :selected="selectedAssets"
+              :show.sync="assetSelector"
+              :view-mode="selectorViewMode"
+    ></selector>
+
+    <modal :show.sync="showCheatsheet" class="markdown-modal">
+        <template slot="header">Markdown Cheatsheet</template>
+        <template slot="body">
+            {{{ translate('markdown.cheatsheet') }}}
+        </template>
+    </modal>
+
+
+</div>

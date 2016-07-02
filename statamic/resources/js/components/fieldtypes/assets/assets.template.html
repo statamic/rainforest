@@ -1,0 +1,50 @@
+<div class="assets-field-wrapper"
+    :class="{ 'being-dragging': draggingFile && !selector }"
+    @dragover="draggingFile = true"
+    @dragleave="draggingFile = false"
+    @drop="draggingFile = false">
+
+    <div v-if="loading" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <div class="drag-notification" v-if="draggingFile && !selector">
+        <i class="icon icon-download"></i>
+        <h3>Drop to upload</h3>
+    </div>
+
+    <div class="asset-uploader-container" :class="{ 'max-files-reached': maxFilesReached }" v-if="!loading">
+
+        <div class="manage-assets" v-else v-if="expanded && !maxFilesReached">
+            <button type="button" class="btn btn-with-icon" @click="selectAsset">
+                <span class="icon icon-folder-images"></span>
+                {{ translate('cp.browse_assets') }}
+            </button>
+            <p>or <a href='' @click.prevent="openFinder">upload</a> new file</p>
+        </div>
+
+        <div class="asset-uploader" v-if="expanded">
+            <div class="asset-listing grid">
+                <asset v-for="asset in assetQueue" :asset="asset"></asset>
+            </div>
+        </div>
+
+        <div class="empty-assets" v-if="! expanded">
+            <span class="icon icon-large icon-folder-images"></span>
+            <button type="button" class="btn btn-lg btn-white" @click="selectAsset">
+                {{ translate('cp.browse_assets') }}
+            </button>
+            <p>or <a href='' @click.prevent="openFinder">upload</a> new file</p>
+        </div>
+
+
+        <input type="file" multiple="multiple" class="system-file-upload hide">
+    </div>
+
+    <selector :container="container"
+              :folder="folder"
+              :selected="clone(assets)"
+              :show.sync="selector"
+              :view-mode="selectorViewMode">
+    </selector>
+</div>

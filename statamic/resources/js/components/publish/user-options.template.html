@@ -1,0 +1,9 @@
+<div class="btn-group">
+    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        User Options &nbsp; <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <li><a href="" @click.prevent="sendResetEmail">Send {{ status == 'pending' ? 'activation' : 'password reset' }} email</a></li>
+        <li><a href="" @click.prevent="copyResetLink">Copy {{ status == 'pending' ? 'activation' : 'password reset' }} link</a></li>
+    </ul>
+</div>

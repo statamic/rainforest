@@ -1,0 +1,10 @@
+fields:
+
+  start_page:
+    type: select
+    options:
+      dashboard: Dashboard
+      pages: Pages
+
+  widgets:
+    type: yaml

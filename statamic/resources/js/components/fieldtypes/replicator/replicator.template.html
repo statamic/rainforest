@@ -1,0 +1,44 @@
+<div class="replicator-field">
+
+    <div class="replicator-sets">
+        <div class="list-group" v-for="(setIndex, set) in data">
+            <div class="list-group-item group-header">
+                <div class="btn-group icon-group pull-right">
+                    <!-- <i class="icon icon-cog"></i> -->
+                    <i class="icon" :class="{ 'icon-triangle-down': !isHidden(set), 'icon-triangle-up': isHidden(set) }" v-on:click="toggle(set)"></i>
+                    <i class="icon icon-cross" v-on:click="deleteSet(this)"></i>
+                    <i class="icon icon-menu drag-handle"></i>
+                </div>
+                <label>{{ setConfig(set.type).display || set.type }}</label>
+                <small class="help-block" v-if="setConfig(set.type).instructions" v-html="setConfig(set.type).instructions | markdown"></small>
+            </div>
+            <div class="list-group-item" v-if="!isHidden(set)">
+                <div class="row">
+                    <div v-for="field in setConfig(set.type).fields" class="{{ colClass(field.width) }}">
+                        <div class="form-group {{ field.type }}-fieldtype">
+                            <label class="block">
+                                <template v-if="field.display">{{ field.display }}</template>
+                                <template v-if="!field.display">{{ field.name | capitalize }}</template>
+                                <i class="required" v-if="field.required">*</i>
+                            </label>
+
+                            <small class="help-block" v-if="field.instructions" v-html="field.instructions | markdown"></small>
+
+                            <component :is="field.type + '-fieldtype'"
+                                       :name="name + '.' + setIndex + '.' + field.name"
+                                       :data.sync="set[field.name]"
+                                       :config="field">
+                            </component>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button type="button" class="btn btn-default" v-for="set in config.sets" v-on:click="addSet(set.name)">
+			{{ set.display || set.name }}<i class="icon icon-plus icon-right"></i>
+        </button>
+    </div>
+</div>

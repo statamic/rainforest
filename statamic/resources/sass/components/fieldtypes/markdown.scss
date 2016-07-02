@@ -1,0 +1,166 @@
+.markdown-fieldtype {
+
+    .markdown-wrap {
+        border: 1px solid $border;
+        border-radius: 3px;
+    }
+
+    .markdown-toolbar {
+        @include toolbar;
+        box-shadow: none;
+        padding: 8px 10px;
+        border-bottom: 1px solid $border;
+    }
+
+    .markdown-modes, .markdown-buttons {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+        }
+    }
+
+    .markdown-modes {
+        float: left;
+        margin-left: 10px;
+
+        li {
+            margin-right: 15px;
+        }
+
+        a {
+            color: #ccc;
+        }
+
+        .active {
+            position: relative;
+
+            &:before, &:after {
+                content: '';
+                border: 5px solid transparent;
+                border-bottom-color: white;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                z-index: 2;
+                margin-top: 2px;
+                margin-left: -3px;
+            }
+
+            &:after {
+                border-bottom-color: darken($border, 5);
+                margin-top: 1px;
+                z-index: 1;
+            }
+
+            a {
+                color: #777;
+            }
+        }
+    }
+
+    .markdown-buttons {
+        float: right;
+
+        li a {
+            display: block;
+            padding: 0 5px;
+        }
+    }
+
+    .mode-wrap {
+        padding: 10px;
+    }
+
+    .CodeMirror {
+        @extend .form-control;
+        height: auto;
+        font-family: $font_lato;
+        font-size: 16px;
+        line-height: 24px;
+
+        .cm-comment {
+            font-family: $font_monospace;
+            font-size: 14px;
+        }
+    }
+
+    .CodeMirror-code { min-height: 100px; }
+
+    .markdown-cheatsheet-helper {
+        display: inline-block;
+        padding: 8px 0 0 0;
+        margin-right: 25px;
+        svg {
+            height: 14px;
+            width: 24px;
+            position: relative;
+            bottom: -2px;
+            margin-right: 3px;
+            opacity: 0.65;
+        }
+    }
+
+    .markdown-asset-helper {
+        padding: 8px 0 0 0;
+        display: inline-block;
+        color: #ccc;
+
+        .icon {
+            margin-right: 3px;
+        }
+    }
+
+    .markdown-preview {
+        h1, h2, h3, h4, h5, h6, p, blockquote {
+            color: #333;
+            font-size: 16px;
+            line-height: 25px;
+            margin-bottom: .5em;
+        }
+
+        li {
+            color: #333;
+            line-height: 1;
+            margin-bottom: .25em;
+        }
+
+        blockquote {
+            font-style: italic;
+        }
+
+        blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        hr {
+            margin: 1em 0 .5em 0 !important;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+
+    .markdown-writer {
+        position: relative;
+    }
+}
+
+// The Grid
+.grid-fieldtype .markdown-fieldtype {
+    .markdown-wrap {
+        border: 0;
+        border-radius: 0;
+    }
+
+    .markdown-preview {
+        border: none;
+        padding: 10px;
+        text-align: left;
+        p { line-height: 1.2; }
+    }
+
+}

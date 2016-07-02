@@ -1,0 +1,52 @@
+button,
+.button {
+    background: $green;
+    border-radius: 3px;
+    box-shadow: none;
+    border: none;
+    color: #fff;
+    outline: none;
+    font-size: 18px;
+    padding: 12px 20px;
+    font-family: Lato, sans-serif;
+    font-weight: 400;
+    text-shadow: none;
+
+    &:hover {
+        background: mix(black, $green, 15%);
+    }
+
+    &.block {
+        display: block;
+        width: 100%;
+    }
+}
+
+.card .stripe-button-el {
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    margin-bottom: 15px;
+
+    span {
+        background: $green;
+        border-radius: 3px;
+        box-shadow: none;
+        border: none;
+        outline: none;
+        font-size: 30px;
+        font-family: Lato, sans-serif;
+        font-weight: 400;
+        text-shadow: none;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    &:hover span {
+        background: mix(black, $green, 15%);
+    }
+}

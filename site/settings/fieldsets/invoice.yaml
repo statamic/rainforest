@@ -1,0 +1,22 @@
+fields:
+  price:
+    type: text
+    instructions: Setting a price will override your hours
+  hours:
+    type: grid
+    fields:
+      date:
+        type: date
+        allow_time: false
+      amount:
+        type: text
+  rate:
+    instructions: Leave blank to fall back to your default rate (global)
+    type: text
+    mode: number
+  client:
+    type: users
+    max_items: 1
+    label: name
+  paid:
+    type: toggle

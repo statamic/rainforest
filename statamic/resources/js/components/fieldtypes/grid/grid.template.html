@@ -1,0 +1,74 @@
+<div class="grid-field grid-mode-{{ (stacked) ? 'stacked' : 'table' }}">
+	<table v-if="hasData && !stacked" class="grid-table bordered-table">
+		<thead>
+			<tr>
+				<th v-for="field in config.fields" :style="{ width: gridColWidth(field.width) }">
+					<label class="block">
+						<template v-if="field.display">{{ field.display }}</template>
+						<template v-if="!field.display">{{ field.name | capitalize }}</template>
+						<i class="required" v-if="field.required">*</i>
+					</label>
+
+					<small class="help-block" v-if="field.instructions" v-html="field.instructions | markdown"></small>
+				</th>
+                <th class="row-controls"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="(rowIndex, row) in data" :class="{excess: isExcessive(rowIndex)}">
+				<td v-for="field in config.fields">
+					<div class="{{ field.type }}-fieldtype">
+						<component :is="field.type + '-fieldtype'"
+						           :name="name + '.' + rowIndex + '.' + field.name"
+						           :data.sync="row[field.name]"
+						           :config="field">
+						</component>
+					</div>
+				</td>
+                <td class="row-controls">
+                    <span class="icon icon-menu move drag-handle"></span>
+                    <span class="icon icon-cross delete" v-on:click="deleteRow(rowIndex)"></span>
+                </td>
+			</tr>
+		</tbody>
+	</table>
+
+	<div v-if="hasData && stacked" class="grid-stacked">
+		<div class="list-group" v-for="row in data">
+			<div class="list-group-item group-header">
+				<div class="btn-group icon-group pull-right">
+                    <i class="icon icon-cross" v-on:click="deleteRow($index)"></i>
+                    <i class="icon icon-menu drag-handle"></i>
+				</div>
+				<label>{{ $index + 1 }}</label>
+			</div>
+			<div class="list-group-item">
+				<div class="row">
+					<div v-for="field in config.fields" class="{{ colClass(field.width )}}">
+						<div class="form-group {{ field.type }}-fieldtype">
+							<label class="block">
+								<template v-if="field.display">{{ field.display }}</template>
+								<template v-if="!field.display">{{ field.name | capitalize }}</template>
+								<i class="required" v-if="field.required">*</i>
+							</label>
+
+							<small class="help-block" v-if="field.instructions" v-html="field.instructions | markdown"></small>
+
+							<component :is="field.type + '-fieldtype'"
+							           :name="field.name"
+							           :data.sync="row[field.name]"
+							           :config="field">
+							</component>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<template v-if="canAddRows">
+		<button type="button" class="btn btn-default add-row" @click="addRow">
+			{{ addRowButton }}
+		</button>
+	</template>
+</div>

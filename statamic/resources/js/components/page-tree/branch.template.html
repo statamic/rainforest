@@ -1,0 +1,49 @@
+<li class="branch" :class="{ draft: !published }">
+    <div class="branch-row">
+        <div class="page-indent">
+            <span :class="{'page-toggle': true, toggleable: hasChildren}" v-on:click="toggle">
+                <i v-if="hasChildren" :class="{ 'icon': true, 'icon-chevron-down': true, 'collapsed': collapsed }"></i>
+            </span>
+            <span class="page-move drag-handle" v-if="!home"></span>
+            <span class="page-unmovable" v-if="home"></span>
+            <span class="indent-arrow" v-if="!home"></span>
+        </div>
+
+        <div class="page-text">
+            <a :href="editUrl" class="page-title">{{ title }}</a>
+            <a :href="editUrl" class="page-url">{{ url }}</a>
+        </div>
+
+        <div class="page-extras">
+            <div class="page-entries" v-if="hasEntries">
+                <i class="icon icon-documents"></i>
+                <a :href="createEntryUrl">{{ translate('cp.add') }}</a>
+                {{ translate('cp.or') }}
+                <a :href="entriesUrl">{{ translate('cp.edit') }}</a>
+            </div>
+        </div>
+
+        <div class="branch-meta">
+            <div class="page-actions" v-if="can('pages:create') || can('pages:delete')">
+                <a :href="url" :title="url" class="page-action" target="_blank">
+                    <i class="icon icon-link"></i>
+                </a>
+                <div class="btn-group page-action action-more">
+                    <i class="icon icon-dots-three-vertical" data-toggle="dropdown"></i>
+                    <ul class="dropdown-menu">
+                        <li v-if="can('pages:create')"><a href="" @click.prevent="createPage">{{ translate('cp.create_page_button') }}</a></li>
+                        <li v-if="can('pages:create') && can('pages:delete')" class="divider"></li>
+                        <li v-if="can('pages:delete')" class="warning"><a href="" @click.prevent="deletePage">{{ translate('cp.delete') }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <branches :pages="childPages"
+              :depth="depth + 1"
+              :parent-url="url"
+              :collapsed.sync="collapsed"
+              v-if="!home">
+    </branches>
+</li>

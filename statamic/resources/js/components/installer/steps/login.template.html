@@ -1,0 +1,16 @@
+<div class="card">
+
+    <div class="head">
+        <h1>Login</h1>
+    </div>
+
+    <hr>
+
+    <div v-if="!loggedIn" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span>
+        Logging in...
+    </div>
+
+    <p v-if="loggedIn">Logged in! Taking you to the control panel...</p>
+
+</div>

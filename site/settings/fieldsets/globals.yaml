@@ -1,0 +1,8 @@
+title: Globals
+fields:
+  company:
+    type: text
+  rate:
+    type: text
+    mode: number
+    instructions: Your default hourly rate

@@ -1,0 +1,19 @@
+<div>
+
+    <div v-if="loading" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <p v-if="!loading && !canEdit" class="form-control-static">
+        <template v-for="role in selectedRoleNames">
+            {{ role }}<template v-if="$index !== selectedRoleNames.length-1">,</template>
+        </template>
+    </p>
+
+    <checkboxes-fieldtype v-if="!loading && canEdit"
+                          :name="name"
+                          :data.sync="data"
+                          :config="checkboxesConfig">
+    </checkboxes-fieldtype>
+
+</div>

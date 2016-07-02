@@ -1,0 +1,32 @@
+<div class="card flat-bottom sticky">
+    <div class="head">
+        <h1>
+            {{ container }}
+            <strong v-if="path !== '/'"><small>{{ path }}</small></strong>
+        </h1>
+        <div class="btn-group" v-if="path === '/'">
+            <button class="btn btn-secondary" @click="sync" :disabled="syncing">
+                <template v-if="!syncing">{{ translate('cp.sync_assets') }}</template>
+                <template v-if="syncing">{{ translate('cp.syncing_assets') }}</template>
+            </button>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" @click="openFinder">{{ translate('cp.upload_asset') }}</button>
+        </div>
+    </div>
+</div>
+<div class="card flat-top">
+
+    <div v-if="loading" class="loading">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <asset-listing v-if="!loading"
+                   name="browse"
+                   :assets="assets"
+                   :folders="folders"
+                   :folder="folder"
+                   :container="uuid"
+                   :path="path">
+    </asset-listing>
+</div>

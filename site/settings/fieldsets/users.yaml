@@ -1,0 +1,7 @@
+title: Users
+hide: true
+fields:
+  email:
+    type: text
+    display: Email
+    validate: email

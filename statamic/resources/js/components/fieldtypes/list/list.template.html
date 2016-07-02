@@ -1,0 +1,26 @@
+<ul>
+	<li v-for="item in data" track-by="$index" :class="{ editing: (editing == $index) }">
+
+		<span v-if="editing == $index">
+			<input
+				type="text"
+				v-model="item"
+				class="form-control"
+				@keydown.enter="updateItem(item, $index, $event)"
+				@keyup.up="goUp"
+				@keyup.down="goDown"
+			/>
+		</span>
+
+		<span v-if="editing != $index" @dblclick="editItem($index, $event)">
+		    {{ item }}
+			<i class="delete" @click="deleteItem(item)"></i>
+		</span>
+	</li>
+	<li>
+		<input type="text" class="form-control new-item" v-model="newItem"
+		       @keydown.enter.prevent="addItem"
+			   @keyup.up="goUp"
+		/>
+	</li>
+</ul>

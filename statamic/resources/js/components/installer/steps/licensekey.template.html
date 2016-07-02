@@ -1,0 +1,41 @@
+<div class="card">
+
+    <div class="head">
+        <h1>License Key</h1>
+    </div>
+
+    <hr>
+
+    <div v-if="loading" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span>
+        Checking your license key, please wait...
+    </div>
+
+    <p v-if="valid">You have a valid license key.</p>
+
+    <template v-if="!loading && !valid">
+        <p>Please enter your license key. You can find yours in your <a href="https://account.statamic.com/licenses">Statamic Account</a> or you can <a href="https://trading-post.statamic.com">buy a new license</a> if you need to.</p>
+
+        <div class="form-group">
+            <p v-if="!valid && keySubmitted" class="license-error">
+                <small class="help-block">This key is invalid.</small>
+            </p>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" v-model="key" />
+                </div>
+                <div class="col-sm-3">
+                    <button class="btn btn-primary btn-block" @click="validate" :disabled="!key">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="trial">
+            <a href="" @click.prevent="continue" class="btn">Continue in Trial Mode</a>
+            <a href="https://statamic.com/try" class="what" target="_blank">What's this?</a>
+        </div>
+    </template>
+
+</div>

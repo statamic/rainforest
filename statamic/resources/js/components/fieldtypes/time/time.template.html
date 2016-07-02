@@ -1,0 +1,16 @@
+<div>
+    <input type="number" min="00" max="23" v-model="hour" v-el:hour
+        @keydown.up.prevent="incrementHour(1)"
+        @keydown.down.prevent="incrementHour(-1)"
+        @keydown.esc="clear"
+        @keydown.186.prevent="focusMinute"
+        @keydown.190.prevent="focusMinute"
+    />
+    :
+    <input type="number" min="00" max="59" v-model="minute" v-el:minute
+        @keydown.up.prevent="incrementMinute(1)"
+        @keydown.down.prevent="incrementMinute(-1)"
+        @keydown.esc="clear"
+    />
+    <span class="icon icon-remove" v-show="hasTime" v-if="hasTime" @click="clear">&times;</span>
+</div>

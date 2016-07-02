@@ -1,0 +1,57 @@
+<div class="island">
+
+    {{ if logged_in }}
+    <a href="/invoices">
+        <img src="{{ theme:img src="logo.png" }}" class="logo" />
+    </a>
+    {{ else }}
+        <img src="{{ theme:img src="logo.png" }}" class="logo" />
+    {{ /if }}
+
+    <div class="card">
+
+        <header>
+            <h1>{{ title }}</h1>
+        </header>
+
+        {{ if paid }}
+
+            <h2 class="paid">PAID</h2>
+            <h6>Thank you! Have a wonderful day.</h6>
+
+        {{ else }}
+
+            <h2 class="green">
+                <sup>$</sup>{{ partial:price }}
+            </h2>
+
+            <footer>
+                <h6>Send payment to {{ company }}</h6>
+
+                {{ stripe:checkout
+                    action="{rainmaker:checkout_action}"
+                    amount="{partial:price_cents}"
+                    description="{title}"
+                    email="{email}"
+                    label="Pay ${partial:price}"
+                }}
+                <input type="hidden" name="invoice" value="{{ id }}" />
+                {{ /stripe:checkout }}
+            </footer>
+
+
+        {{ /if }}
+    </div>
+
+    {{ if ! paid && logged_in }}
+    <div class="controls">
+        <a href="{{ edit_url }}" class="edit">Edit Invoice</a>
+        {{ user:client }}
+        <a href="mailto:{{ email }}?subject={{ title }}&body={{ permalink }}" class="edit">Send Email</a>
+        {{ /user:client }}
+    </div>
+    {{ /if }}
+
+</div>
+
+{{ stripe:js }}

@@ -1,0 +1,25 @@
+<div class="card">
+
+    <div class="head">
+        <h1>Permissions</h1>
+    </div>
+
+    <hr>
+
+    <div v-if="loading" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span>
+        Checking folder permissions, please wait...
+    </div>
+
+    <div v-if="failure">
+        <p>The following directories need to be writable:</p>
+        <ul>
+            <li v-for="path in unwritable"><code>{{ path }}</code></li>
+        </ul>
+    </div>
+
+    <template v-if="success">
+        <p>File and folder permissions look great!</p>
+    </template>
+
+</div>

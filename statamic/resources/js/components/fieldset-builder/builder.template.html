@@ -1,0 +1,56 @@
+<div>
+	<div class="card sticky flat-bottom">
+		<div class="head">
+			<h1 class="pull-left" v-if="create">
+				{{ translate('cp.create_fieldset') }}
+			</h1>
+
+			<h1 class="pull-left" v-if="!create">
+				{{ translate('cp.editing_fieldset') }}:
+				<strong>{{ fieldsetTitle }}</strong>
+			</h1>
+
+			<button type="button" class="btn btn-primary pull-right" v-on:click="save()">{{ translate('cp.save') }}</button>
+		</div>
+	</div>
+
+	<div class="card flat-top">
+		<div v-if="loading && !errorMessage" class="loading">
+			<span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+		</div>
+
+		<div v-if="errorMessage" class="alert alert-danger">
+			<p>{{ errorMessage }}</p>
+		</div>
+
+		<div class="fieldset-builder" v-if="! loading">
+
+			<div class="form-group">
+				<label class="block">Title</label>
+				<small class="help-block">How the fieldset will be displayed.</small>
+				<input type="text" class="form-control" v-model="fieldset.title" />
+			</div>
+
+			<div class="form-group" v-if="create">
+				<label class="block">Slug</label>
+				<small class="help-block">How the fieldset will be referenced.</small>
+				<input type="text" class="form-control" v-model="slug" />
+			</div>
+
+			<div class="form-group">
+				<label class="block">Hide</label>
+				<small class="help-block">Hide from the selection dialog?</small>
+				<toggle-fieldtype :data.sync="fieldset.hide"></toggle-fieldtype>
+			</div>
+
+			<div class="form-group">
+				<label class="block">Fields</label>
+				<small class="help-block">Choose and customize the fields in this fieldset.</small>
+				<fields-builder :fields="fieldset.fields"
+								:fieldtypes="fieldtypes"
+								:root="true">
+				</fields-builder>
+			</div>
+		</div>
+	</div>
+</div>

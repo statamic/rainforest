@@ -1,0 +1,14 @@
+<ul>
+    <li v-for="option in config.options">
+
+        <input type="checkbox"
+               name="{{ name }}[]"
+               :id="name + '-' + $index"
+               :value="option.value"
+               v-model="data"
+		/>
+
+        <label :for="name + '-' + $index">{{ option.text }}</label>
+
+    </li>
+</ul>

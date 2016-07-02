@@ -1,0 +1,38 @@
+{{ if logged_in }}{{ redirect to="invoices"}}{{ /if }}
+
+<div class="container">
+
+    <header>
+        <img src="{{ theme:img src="logo.png" }}" class="logo" />
+    </header>
+
+    {{ user:login_form redirect="/invoices" }}
+    <div class="card small">
+
+        <header>
+            <h1>{{ title }}</h1>
+        </header>
+
+        {{ if errors }}
+            <div class="alert alert-danger">
+                {{ errors }}
+                    <p>{{ value }}</p>
+                {{ /errors }}
+            </div>
+        {{ /if }}
+
+        <div class="input">
+            <input type="text" name="username" value="{{ old:username }}" placeholder="Username"/>
+        </div>
+
+        <div class="input">
+            <input type="password" name="password" value="{{ old:password }}" placeholder="Password" />
+        </div>
+
+        <footer>
+            <button class="block">Log In</button>
+        </footer>
+
+    </div>
+    {{ /user:login_form }}
+</div>

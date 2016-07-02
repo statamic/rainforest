@@ -1,0 +1,12 @@
+<div>
+
+    <div v-if="loading" class="loading loading-basic">
+        <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+    </div>
+
+    <checkboxes-fieldtype v-if="! loading"
+                          :data.sync="data"
+                          :config="checkboxesConfig">
+    </checkboxes-fieldtype>
+
+</div>

@@ -1,0 +1,6 @@
+driver: zend
+algolia_api_key:
+algolia_app_id:
+auto_index: false
+index_frequency: 5
+default_index: default

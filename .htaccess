@@ -1,0 +1,49 @@
+# ------------------------------------------------------------------------------
+# BASE APACHE RULES
+#
+# When running in a subdirectory, you should uncomment and adjust the
+# RewriteBase rule to point to your directory, eg. RewriteBase /directory/
+# ------------------------------------------------------------------------------
+
+Options -MultiViews
+RewriteEngine On
+# RewriteBase /
+
+
+# ------------------------------------------------------------------------------
+# REMOVE TRAILING SLASHES
+# ------------------------------------------------------------------------------
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+
+# ------------------------------------------------------------------------------
+# STATIC CACHING PROXY
+#
+# Enable these rules when using static html caching
+# to bypass Statamic when a given URL has a cached copy.
+# ------------------------------------------------------------------------------
+
+# RewriteCond %{REQUEST_FILENAME}   !-f
+# RewriteRule ^(.*) static/$1/index.html
+
+
+# ------------------------------------------------------------------------------
+# PROTECT SYSTEM DIRECTORIES
+#
+# Not necessary when running above webroot.
+# ------------------------------------------------------------------------------
+
+RewriteRule ^site/(?!themes) - [F,L]
+RewriteRule ^local - [F,L]
+RewriteRule ^statamic - [F,L]
+
+
+# ------------------------------------------------------------------------------
+# ROUTE THROUGH INDEX.PHP
+# ------------------------------------------------------------------------------
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]

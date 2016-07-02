@@ -1,0 +1,38 @@
+{{ if logged_out }}{{ redirect to="/" }}{{ /if }}
+
+<div class="container">
+
+    <header>
+        <img src="{{ theme:img src="logo.png" }}" class="logo" />
+    </header>
+
+    <div class="card flush large">
+
+        {{ collection:invoices paid:isnt="true" as="invoices" }}
+            {{ if invoices }}
+                <h6 class="pad">Outstanding</h6>
+                <table>
+                    {{ invoices }}
+                        {{ partial:row }}
+                    {{ /invoices }}
+                </table>
+            {{ /if }}
+        {{ /collection:invoices }}
+
+        {{ collection:invoices paid:is="true" as="invoices" }}
+            {{ if invoices }}
+                <h6 class="pad">Paid</h6>
+                <table>
+                    {{ invoices }}
+                        {{ partial:row }}
+                    {{ /invoices }}
+                </table>
+            {{ /if }}
+        {{ /collection:invoices }}
+    </div>
+
+    <div class="controls">
+        <a href="/cp/collections/entries/invoices/create" class="button">New Invoice</a>
+    </div>
+
+</div>

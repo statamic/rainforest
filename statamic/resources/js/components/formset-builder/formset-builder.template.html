@@ -1,0 +1,75 @@
+<div>
+    <div class="card sticky flat-bottom">
+        <div class="head">
+            <h1 class="pull-left" v-if="create">
+                {{ translate('cp.create_formset') }}
+            </h1>
+
+            <h1 class="pull-left" v-if="!create">
+                {{ translate('cp.editing_formset') }}:
+                <strong>{{ formsetTitle }}</strong>
+            </h1>
+
+            <button type="button" class="btn btn-primary pull-right" v-on:click="save()">{{ translate('cp.save') }}</button>
+        </div>
+    </div>
+
+    <div class="card flat-top">
+        <div v-if="loading && !errorMessage" class="loading">
+            <span class="icon icon-circular-graph animation-spin"></span> {{ translate('cp.loading') }}
+        </div>
+
+        <div v-if="errorMessage" class="alert alert-danger">
+            <p>{{ errorMessage }}</p>
+        </div>
+
+        <div class="fieldset-builder" v-if="! loading">
+
+            <div class="form-group">
+                <label class="block">Title</label>
+                <small class="help-block">Your formset's proper label.</small>
+                <input type="text" class="form-control" v-model="formset.title" />
+            </div>
+
+            <div class="form-group" v-if="create">
+                <label class="block">Slug</label>
+                <small class="help-block">How the formset will be referenced.</small>
+                <input type="text" class="form-control" v-model="slug" />
+            </div>
+
+            <div class="form-group">
+                <label class="block">Columns</label>
+                <small class="help-block">Choose which columns should be displayed and in what order.</small>
+                <formset-columns :fields="formset.fields" :columns.sync="columns"></formset-columns>
+            </div>
+
+            <div class="form-group">
+                <label class="block">Metrics</label>
+                <small class="help-block">Specify any metrics you would like displayed.</small>
+                <grid-fieldtype :data.sync="formset.metrics" :config="metricsGridConfig"></grid-fieldtype>
+            </div>
+
+            <div class="form-group">
+                <label class="block">Emails</label>
+                <small class="help-block">Add any emails you want to be sent upon submission.</small>
+                <grid-fieldtype :data.sync="formset.email" :config="emailGridConfig"></grid-fieldtype>
+            </div>
+
+            <div class="form-group">
+                <label class="block">Honeypot Field</label>
+                <small class="help-block">The field name to be used for the honeypot. <a href="https://docs.statamic.com/guides/forms#honeypot">What's a honeypot?</a></small>
+                <input type="text" class="form-control" v-model="formset.honeypot" />
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card" v-if="!loading">
+        <div class="head clearfix">
+            <h2>Fields</h2>
+            <small class="help-block">Choose and customize the fields in this form.</small>
+        </div>
+
+        <formset-fields-builder :fields="formset.fields"></formset-fields-builder>
+    </div>
+</div>

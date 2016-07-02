@@ -1,0 +1,19 @@
+<div>
+    <modal :show.sync="show" :full="true">
+        <template slot="header">Asset Manager</template>
+
+        <template slot="body">
+            <asset-listing v-if="showListing"
+                           :container="container"
+                           :path="folder"
+                           :selected-assets.sync="selected"
+                           :mode="viewMode">
+            </asset-listing>
+        </template>
+
+        <template slot="footer">
+            <button type="button" class="btn" @click="close">{{ translate('cp.close') }}</button>
+            <button type="button" class="btn btn-primary btn-small" @click="select">{{ translate('cp.select') }}</button>
+        </template>
+    </modal>
+</div>

@@ -1,0 +1,9 @@
+<div class="fieldtype-selector">
+	<div class="select" :data-content="fieldtypeSelectionText">
+		<select v-model="fieldtypeSelection">
+            <option v-for="option in fieldtypesSelectOptions" :value="option.value" :disabled="option.disabled">{{ option.text }}</option>
+        </select>
+	</div>
+
+	<button type="button" class="btn btn-default" v-on:click="addField" :disabled="!fieldtypeSelection"><i class="icon icon-plus"></i></button>
+</div>

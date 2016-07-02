@@ -1,0 +1,5 @@
+<div class="select select-full" :data-content="label">
+	<select :name="name" v-model="data">
+		<option v-for="option in selectOptions" :value="option.value">{{ option.text }}</option>
+	</select>
+</div>

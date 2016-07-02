@@ -1,0 +1,25 @@
+<tr>
+    <td class="client" width="35%">
+        {{ user:client }}
+            <a href="/invoices/{{ id }}">
+                <img src="{{ email | gravatar }}" class="avatar" />
+                {{ name }}
+            </a>
+
+        {{ /user:client }}
+    </td>
+    <td><a href="{{ url }}" width='25%'>{{ title }}</a></td>
+    <td width="15%">{{ date format="M j, Y" }}</td>
+    <td width="5%" class="email">
+        {{ if ! paid }}
+        {{ user:client }}
+            <a href="mailto:{{ email }}?subject={{ title }}&body={{ permalink }}">
+                {{ theme:output src="img/email.svg" }}
+            </a>
+        {{ /user:client}}
+        {{ /if }}
+    </td>
+    <td class="green">
+        ${{ partial:price }}
+    </td>
+</tr>
