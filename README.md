@@ -5,6 +5,7 @@
 - Replace the contents of `site` with those from the package
 
 **Integrating into an existing site**
+
 If you're integrating Rainforest into an existing site, cherrypick these instructions and take care not to overwrite settings or content files you might need. The following steps are are necessary at a minimum.
 
 - Move the addons from `addons/` into `/site/addons`
