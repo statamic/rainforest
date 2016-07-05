@@ -12,3 +12,5 @@ fields:
   email:
     type: text
     mode: email
+  address:
+    type: textarea
