@@ -1,0 +1,14 @@
+title: Clients
+
+hide: true
+
+fields:
+  name:
+    display: Client Name
+    type: text
+  username:
+    display: Slug
+    instructions: "Shown in the in the URL. Example: `acme-co`"
+  email:
+    type: text
+    mode: email
