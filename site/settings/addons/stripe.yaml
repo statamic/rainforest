@@ -1,3 +1,3 @@
-name: Wilderborn, LLC
-image: http://wilderborn.dev/site/themes/wilderborn/img/twitter-avatar.jpg
+name:
+image: 
 key: '{env:STRIPE_PUBLISHABLE_KEY}'
