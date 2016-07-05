@@ -3,6 +3,7 @@
 - Setup a fresh Statamic install
 - Unzip the Rainforest package
 - Replace the contents of `site` with those from the package
+- Run `php please addons:refresh` or Refresh the Addons from the Control Panel
 
 **Integrating into an existing site**
 
@@ -24,9 +25,23 @@ STRIPE_SECRET_KEY=
 STRIPE_PUBLISHABLE_KEY=
 ```
 
-## Theme customization
+## Customization
 
+
+### The Theme
 As long as you like the basic theme, Rainforest is very close to drop-and-go ready. You'll want to edit the Globals file to set your `company` name, and update the logo in `site/themes/rainforest/img/logo.png` but that's pretty much it. If you want to redesign everything, go right ahead. The `gulpfile` necessary to compile the SASS and is included. Do you thing!
+
+### Stripe Checkout
+
+You can set a number of options on the Stripe Checkout form. These would be in `site/settings/stripe/stripe.yaml`.
+
+The two most notible are:
+
+```
+# The company name you'd like displayed
+name:
+# URL of an icon associated with your or your company.
+image:
 
 ## Clients
 
