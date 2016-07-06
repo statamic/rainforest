@@ -7,7 +7,7 @@
 
 **Integrating into an existing site**
 
-If you're integrating Rainforest into an existing site, cherrypick these instructions and take care not to overwrite settings or content files you might need. The following steps are are necessary at a minimum.
+If you're integrating Rainforest into an existing site, cherrypick these instructions and take care not to overwrite settings or content files you might need. The following steps are necessary at a minimum.
 
 - Move the addons from `addons/` into `/site/addons`
 - Move `theme/rainforest` into `site/themes/`
@@ -29,16 +29,16 @@ STRIPE_PUBLISHABLE_KEY=
 
 
 ### The Theme
-As long as you like the basic theme, Rainforest is very close to drop-and-go ready. You'll want to edit the Globals file to set your `company` name, and update the logo in `site/themes/rainforest/img/logo.png` but that's pretty much it. If you want to redesign everything, go right ahead. The `gulpfile` necessary to compile the SASS and is included. Do you thing!
+As long as you like the basic theme, Rainforest is very close to drop-and-go ready. You'll want to edit the Globals file to set your `company` name, and update the logo in `site/themes/rainforest/img/logo.png` but that's pretty much it. If you want to redesign everything, go right ahead. The `gulpfile` necessary to compile the SASS and is included. Do your thing!
 
 ### Stripe Checkout
 
 You can set a number of options on the Stripe Checkout form. These would be in `site/settings/stripe/stripe.yaml`.
 
-The two most notible are:
+The two most notable are:
 
 ```
-# The company name you'd like displayed
+# The company name you'd like to display
 name:
 # URL of an icon associated with your or your company.
 image:
