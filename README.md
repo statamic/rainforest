@@ -42,6 +42,7 @@ The two most notable are:
 name:
 # URL of an icon associated with your or your company.
 image:
+```
 
 ## Clients
 
