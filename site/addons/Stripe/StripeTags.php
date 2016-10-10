@@ -19,6 +19,7 @@ class StripeTags extends Tags
 
         return '
             <form action="' . $this->get('action', '/charge') . '" method="POST">
+            '. csrf_field() .'
                 <script
                     src="https://checkout.stripe.com/checkout.js"
                     class="stripe-button"
